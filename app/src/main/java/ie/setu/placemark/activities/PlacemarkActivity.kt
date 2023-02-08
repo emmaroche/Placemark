@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.placemark.databinding.ActivityPlacemarkBinding
+import ie.setu.placemark.main.MainApp
 import ie.setu.placemark.models.PlacemarkModel
 import timber.log.Timber
 import timber.log.Timber.i
@@ -12,7 +13,8 @@ class PlacemarkActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPlacemarkBinding
     var placemark = PlacemarkModel()
-    val placemarks = ArrayList<PlacemarkModel>()
+    //val placemarks = ArrayList<PlacemarkModel>()
+    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,18 +22,22 @@ class PlacemarkActivity : AppCompatActivity() {
         binding = ActivityPlacemarkBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Timber.plant(Timber.DebugTree())
+        app = application as MainApp
 
         i("Placemark Activity started...")
 
         binding.btnAdd.setOnClickListener() {
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.desc = binding.description.text.toString()
-            if (placemark.title.isNotEmpty() && placemark.desc.isNotEmpty()) {
-                i("add Button Pressed: $placemark.title")
-                i("add Button Pressed: $placemark.desc")
-                placemarks.add(placemark.copy())
-                i("placemarks $placemarks")
+            if (placemark.title.isNotEmpty()) {
+
+                app.placemarks.add(placemark.copy())
+                i("add Button Pressed: ${placemark}")
+                for (i in app.placemarks.indices) {
+                    i("Placemark[$i]:${this.app.placemarks[i]}")
+                }
+                setResult(RESULT_OK)
+                finish()
             }
             else {
                 Snackbar
@@ -39,7 +45,5 @@ class PlacemarkActivity : AppCompatActivity() {
                     .show()
             }
         }
-
-
     }
 }
