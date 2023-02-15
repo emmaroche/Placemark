@@ -27,5 +27,6 @@
             android:layout_below="@id/placemarkTitle"
             tools:text="A Description" />
 
+
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
