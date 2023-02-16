@@ -45,16 +45,21 @@ class PlacemarkActivity : AppCompatActivity() {
             if (placemark.title.isEmpty()) {
                 Snackbar.make(it,R.string.snackbar_Text, Snackbar.LENGTH_LONG)
                     .show()
+
             } else {
                 if (edit) {
                     app.placemarks.update(placemark.copy())
+                    i("edit Button Pressed: $placemark")
+                    setResult(RESULT_OK)
+                    finish()
                 } else {
                     app.placemarks.create(placemark.copy())
+                    i("add Button Pressed: $placemark")
+                    setResult(RESULT_OK)
+                    finish()
                 }
             }
-            i("add Button Pressed: $placemark")
-            setResult(RESULT_OK)
-            finish()
+
         }
 
     }
@@ -64,8 +69,6 @@ class PlacemarkActivity : AppCompatActivity() {
         if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
