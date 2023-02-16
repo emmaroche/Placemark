@@ -15,7 +15,7 @@ import ie.setu.placemark.main.MainApp
 
 class PlacemarkListActivity : AppCompatActivity() {
 
-    lateinit var app: MainApp
+    private lateinit var app: MainApp
     private lateinit var binding: ActivityPlacemarkListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
