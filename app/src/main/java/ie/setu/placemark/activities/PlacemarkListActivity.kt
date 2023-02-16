@@ -63,7 +63,10 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
         val launcherIntent = Intent(this, PlacemarkActivity::class.java)
         launcherIntent.putExtra("placemark_edit", placemark)
         getClickResult.launch(launcherIntent)
+
     }
+
+
 
     private val getClickResult =
         registerForActivityResult(

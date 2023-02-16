@@ -17,6 +17,7 @@ class PlacemarkActivity : AppCompatActivity() {
     var placemark = PlacemarkModel()
     //val placemarks = ArrayList<PlacemarkModel>()
     lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,36 +32,40 @@ class PlacemarkActivity : AppCompatActivity() {
         i("Placemark Activity started...")
 
         if (intent.hasExtra("placemark_edit")) {
+            edit = true
             placemark = intent.extras?.getParcelable("placemark_edit")!!
             binding.placemarkTitle.setText(placemark.title)
             binding.description.setText(placemark.description)
+            binding.btnAdd.setText(R.string.button_savePlacemark)
         }
 
         binding.btnAdd.setOnClickListener() {
             placemark.title = binding.placemarkTitle.text.toString()
             placemark.description = binding.description.text.toString()
-            if (placemark.title.isNotEmpty()) {
-                app.placemarks.create(placemark.copy())
-                i("add Button Pressed: ${placemark}")
-                setResult(RESULT_OK)
-                finish()
-            }
-            else {
-
-                val string: String = getString(R.string.snackbar_Text)
-
-                Snackbar
-                    .make(it, string, Snackbar.LENGTH_LONG)
+            if (placemark.title.isEmpty()) {
+                Snackbar.make(it,R.string.snackbar_Text, Snackbar.LENGTH_LONG)
                     .show()
-
+            } else {
+                if (edit) {
+                    app.placemarks.update(placemark.copy())
+                } else {
+                    app.placemarks.create(placemark.copy())
+                }
             }
+            i("add Button Pressed: $placemark")
+            setResult(RESULT_OK)
+            finish()
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_placemark, menu)
+        if (edit) menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
+
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {

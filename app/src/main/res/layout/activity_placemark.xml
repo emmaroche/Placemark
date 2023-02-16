@@ -78,6 +78,7 @@
                     android:text="@string/button_addPlacemark"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp" />
+
             </LinearLayout>
         </ScrollView>
 
