@@ -5,5 +5,5 @@
     <string name="hint_description">Description</string>
     <string name="menu_addPlacemark">Add</string>
     <string name="menu_cancelPlacemark">Cancel</string>
-
+    <string name="snackbar_Text">Please Enter a Title</string>
 </resources>

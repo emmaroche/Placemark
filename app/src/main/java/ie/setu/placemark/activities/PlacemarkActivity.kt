@@ -46,9 +46,13 @@ class PlacemarkActivity : AppCompatActivity() {
                 finish()
             }
             else {
+
+                val string: String = getString(R.string.snackbar_Text)
+
                 Snackbar
-                    .make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+                    .make(it, string, Snackbar.LENGTH_LONG)
                     .show()
+
             }
         }
     }
