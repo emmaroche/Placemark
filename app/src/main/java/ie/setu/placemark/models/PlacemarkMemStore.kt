@@ -10,7 +10,7 @@ internal fun getId(): Long {
 
 class PlacemarkMemStore : PlacemarkStore {
 
-    val placemarks = ArrayList<PlacemarkModel>()
+    private val placemarks = ArrayList<PlacemarkModel>()
 
     override fun findAll(): List<PlacemarkModel> {
         return placemarks
@@ -31,6 +31,11 @@ class PlacemarkMemStore : PlacemarkStore {
         }
     }
 
+    override fun delete(placemark: PlacemarkModel) {
+        placemark.id = getId()
+        placemarks.remove(placemark)
+        logAll()
+    }
     private fun logAll() {
         placemarks.forEach { i("$it") }
     }

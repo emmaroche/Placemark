@@ -66,8 +66,6 @@ class PlacemarkListActivity : AppCompatActivity(), PlacemarkListener {
 
     }
 
-
-
     private val getClickResult =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
