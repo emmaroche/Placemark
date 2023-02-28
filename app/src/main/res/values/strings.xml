@@ -9,6 +9,8 @@
     <string name="menu_cancelPlacemark">Cancel</string>
     <string name="snackbar_Text">Please Enter a Title</string>
     <string name="button_addImage"> Add Image </string>
+    <string name="button_changeImage"> Change Image </string>
     <string name="select_placemark_image">Select placemark image</string>
+    <string name="display_placemark_image">Placemark image</string>
 
 </resources>
